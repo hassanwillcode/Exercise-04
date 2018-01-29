@@ -1,0 +1,97 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>HTML 5 Web Storage</title>
+
+<link href="reset.css" type="text/css" rel="stylesheet" />
+
+<link href="webStorage_Style.css" type="text/css" rel="stylesheet" />
+
+<script>
+window.addEventListener("load",init);
+
+function init(){
+	if(typeof(Storage)!=="undefined"){
+	
+	display();
+	
+	var button=document.getElementById("button");
+	button.addEventListener("click",saveInfo);
+	}
+	
+	else{
+	//old bowser	
+	}
+}
+
+function saveInfo(){
+	var type=document.getElementById("type").value;
+    var topping=document.getElementById("topping").value;
+    var quantity=document.getElementById("quantity").value;
+	var member=document.getElementById("member").value;
+	
+	localStorage.setItem("typeName",type);
+    localStorage.setItem("toppingName",topping);
+    localStorage.setItem("quantityAmount",quantity);
+	localStorage.setItem("memberAccount",member);
+	
+	display();
+	
+}
+
+function display(){
+	var rightBox=document.getElementById("useroutput");
+	var theType=localStorage.getItem("typeName");
+    var theTopping=localStorage.getItem("toppingName");
+    var theQuantity=localStorage.getItem("quantityAmount");
+	var theMember=localStorage.getItem("memberAccount");
+    
+	if(theType==undefined){
+		document.getElementById("useroutput").innerHTML="";
+	}
+	else{ document.getElementById("useroutput").innerHTML="Receipt  <hr /><br /><br /> Donut Type: "+theType+"<br /><br /> Donut Topping: "+theTopping+"<br /><br /> Quantity Amount: "+theQuantity+"<br /><br /> Membership Status: "+theMember;
+	}
+	
+}
+
+</script>
+
+
+
+</head>
+
+<body>
+
+<div id="main">
+	<section id="userinput">
+    Order <br>
+	<hr />
+    <br /><br />
+    <form>
+    
+    <div>Donut Type: <br /><input type="text" id="type" size="20"></div>
+    <br />
+    <div>Donut Topping: <br /><input type="text" id="topping" size="20"></div>
+    <br />
+    <div>Quantity: <br /><input type="text" id="quantity" size="20"></div>
+    <br />
+    <div>Are You A Member: <br /><input type="text" id="member" size="20"></div>
+    <br />
+     <div><input type="button" id="button" value="Save"></div>
+    
+    </form>
+    </section>
+    
+    
+    <section id="useroutput">
+ Receipt  
+ 	<hr />
+    <br /><br />
+    </section>
+</div>
+
+
+
+</body>
+</html>
